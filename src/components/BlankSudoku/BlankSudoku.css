@@ -1,0 +1,35 @@
+.blank-grid-container {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(9, 1fr);
+  gap: 2px;
+  height: 50%;
+  width: 350px;
+  height: 350px;
+  background-image: url("noborder.JPG");
+  background-size: 360px;
+  background-repeat: no-repeat;
+  padding: 8px;
+  border: 0px;
+  margin: 15px;
+}
+
+.blank-grid-item {
+  background-color: black;
+  width: 30px;
+  height: 30px;
+  color: white;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  font-size: 24px;
+}
+
+.submit-button {
+  color: white;
+  background-color: Black;
+  width: 100px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 24px;
+}

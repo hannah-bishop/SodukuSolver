@@ -28,7 +28,7 @@ const checkSpace = (
   missingNumbers: string[],
   puzzle: string[][]
 ) => {
-  if (puzzle[space.row][space.column] == "x") {
+  if (puzzle[space.row][space.column] == "") {
     const column = getSpaceColumn(space, puzzle);
     const square = getSpaceSquare(space, puzzle);
     const possibleNumbersforSpace: Array<string> = [];
@@ -57,7 +57,7 @@ const checkNumber = (
     const possibleSpaceForNumber: Array<Space> = [];
     for (let i = 0; i < puzzle.length; i++) {
       let space = { row: rowNumber, column: i };
-      if (puzzle[space.row][space.column] == "x") {
+      if (puzzle[space.row][space.column] == "") {
         const column = getSpaceColumn(space, puzzle);
         const square = getSpaceSquare(space, puzzle);
         const row = getSpaceRow(space, puzzle);
@@ -79,15 +79,15 @@ const checkNumber = (
 
 export const solvePuzzle = (inputPuzzle: string[][]) => {
   while (
-    inputPuzzle[0].includes("x") ||
-    inputPuzzle[1].includes("x") ||
-    inputPuzzle[2].includes("x") ||
-    inputPuzzle[3].includes("x") ||
-    inputPuzzle[4].includes("x") ||
-    inputPuzzle[5].includes("x") ||
-    inputPuzzle[6].includes("x") ||
-    inputPuzzle[7].includes("x") ||
-    inputPuzzle[8].includes("x")
+    inputPuzzle[0].includes("") ||
+    inputPuzzle[1].includes("") ||
+    inputPuzzle[2].includes("") ||
+    inputPuzzle[3].includes("") ||
+    inputPuzzle[4].includes("") ||
+    inputPuzzle[5].includes("") ||
+    inputPuzzle[6].includes("") ||
+    inputPuzzle[7].includes("") ||
+    inputPuzzle[8].includes("")
   ) {
     for (let i = 0; i < inputPuzzle.length; i++) {
       const missingNumbers = checkIfNumberPresent(inputPuzzle[i]);

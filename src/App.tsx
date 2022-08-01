@@ -1,11 +1,13 @@
 import "./App.css";
-import { Soduku } from "./components/sodukuComponent";
-import { puzzle, puzzle2, puzzle3, puzzle4 } from "./puzzle";
+import { BlankSoduku } from "./components/BlankSudoku/BlankSudoku";
+import { Soduku } from "./components/SodukuComponent/sodukuComponent";
+import { puzzle, puzzle2, puzzle3, puzzle4 } from "./ts/puzzle";
 
 function App() {
   return (
     <div className="App">
-      <Soduku puzzle={puzzle3} />
+      <h1>Sudoku Solver</h1>
+      <BlankSoduku />
     </div>
   );
 }
