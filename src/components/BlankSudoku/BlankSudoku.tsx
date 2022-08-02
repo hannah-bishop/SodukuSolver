@@ -34,6 +34,7 @@ export class BlankSoduku extends React.Component {
     board: this.createSudoku(),
     FormStatus: "READY",
     solvedPuzzleSection: <></>,
+    warningMessage: <></>,
   };
 
   submit = (event: React.FormEvent, unsolvedPuzzle: SpaceValue[][]) => {
@@ -74,6 +75,25 @@ export class BlankSoduku extends React.Component {
     });
   }
 
+  numbersOnly(input: string): string {
+    var regex = /[^123456789]/;
+    if (input != "" && regex.test(input)) {
+      const newvar = input.replace(regex, "");
+      this.setState({
+        warningMessage: (
+          <>
+            You have entered an invalid character, please review your submission
+          </>
+        ),
+      });
+      return newvar;
+    }
+    this.setState({
+      warningMessage: <></>,
+    });
+    return input;
+  }
+
   render() {
     return (
       <div className="page">
@@ -83,10 +103,11 @@ export class BlankSoduku extends React.Component {
               row.map((space, j) => (
                 <input
                   className="grid-item"
-                  type={"string"}
-                  placeholder=""
+                  type={"text"}
+                  pattern="[1-9]*"
                   onChange={(event) => {
-                    this.handleChange(event, i, j, event.target.value);
+                    const input = this.numbersOnly(event.target.value);
+                    this.handleChange(event, i, j, input);
                   }}
                 ></input>
               ))
@@ -100,7 +121,7 @@ export class BlankSoduku extends React.Component {
             Solve
           </button>
         </form>
-        {this.state.solvedPuzzleSection}
+        {this.state.warningMessage}
       </div>
     );
   }
