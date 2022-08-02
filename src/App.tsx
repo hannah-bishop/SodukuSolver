@@ -6,7 +6,7 @@ import { puzzle, puzzle2, puzzle3, puzzle4 } from "./ts/puzzle";
 function App() {
   return (
     <div className="App">
-      <h1>Sudoku Solver</h1>
+      <h1 className="title">Sudoku Solver</h1>
       <BlankSoduku />
     </div>
   );

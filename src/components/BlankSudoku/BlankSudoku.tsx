@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { createSolvedSudoku } from "../../ts/createSolvedSudoku";
+import React from "react";
+import { solvePuzzle } from "../../ts/sodukuSolver";
 import { Soduku } from "../SodukuComponent/sodukuComponent";
+import { newPuzzle } from "../../ts/puzzle";
 
 import "./BlankSudoku.css";
 
@@ -37,11 +38,18 @@ export class BlankSoduku extends React.Component {
 
   submit = (event: React.FormEvent, unsolvedPuzzle: SpaceValue[][]) => {
     event.preventDefault();
-    const solvedPuzzle = createSolvedSudoku(unsolvedPuzzle);
-    this.setState({
-      FormStatus: "FINISHED",
-      solvedPuzzleSection: <Soduku puzzle={solvedPuzzle} />,
-    });
+    const solvedPuzzle = solvePuzzle(unsolvedPuzzle);
+    if (solvedPuzzle.puzzle) {
+      this.setState({
+        FormStatus: "FINISHED",
+        solvedPuzzleSection: <Soduku puzzle={solvedPuzzle.puzzle} />,
+      });
+    } else {
+      this.setState({
+        FormStatus: "FAILED",
+        solvedPuzzleSection: <>{solvedPuzzle.message}</>,
+      });
+    }
   };
 
   handleChange(
@@ -52,23 +60,31 @@ export class BlankSoduku extends React.Component {
   ): void {
     let newPuzzle = this.state.board;
     let newSpace = { ...newPuzzle[row][column] };
-    newSpace.changed = true;
+    if (number != "") {
+      newSpace.changed = true;
+    } else {
+      newSpace.changed = false;
+    }
     newSpace.value = number;
     newPuzzle[row][column] = newSpace;
-    this.setState({ board: newPuzzle, FormStatus: "SUBMITTING" });
+    this.setState({
+      board: newPuzzle,
+      FormStatus: "SUBMITTING",
+      solvedPuzzleSection: <></>,
+    });
   }
 
   render() {
     return (
-      <div>
+      <div className="page">
         <form>
-          <div className="blank-grid-container">
+          <div className="grid-container">
             {this.state.board.map((row, i) =>
               row.map((space, j) => (
                 <input
-                  className="blank-grid-item"
+                  className="grid-item"
                   type={"string"}
-                  placeholder={space.value}
+                  placeholder=""
                   onChange={(event) => {
                     this.handleChange(event, i, j, event.target.value);
                   }}

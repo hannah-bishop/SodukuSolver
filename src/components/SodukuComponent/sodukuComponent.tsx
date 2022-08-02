@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from "react";
 import { solvePuzzle } from "../../ts/sodukuSolver";
-import "./sodukuComponent.css";
+import { SpaceValue } from "../BlankSudoku/BlankSudoku";
+import "../BlankSudoku/BlankSudoku.css";
 
 interface SodukuProps {
-  puzzle: string[][];
+  puzzle: SpaceValue[][];
 }
 
 export const Soduku: FunctionComponent<SodukuProps> = (
@@ -12,7 +13,7 @@ export const Soduku: FunctionComponent<SodukuProps> = (
   return (
     <div className="grid-container">
       {sodukuProps.puzzle.map((row) =>
-        row.map((space) => <p className="grid-item">{space}</p>)
+        row.map((space) => <p className="grid-item">{space.value}</p>)
       )}
     </div>
   );

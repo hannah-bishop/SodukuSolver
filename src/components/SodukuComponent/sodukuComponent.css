@@ -1,4 +1,4 @@
-.grid-container {
+/* .grid-container {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
   grid-template-rows: repeat(9, 1fr);
@@ -23,4 +23,4 @@
   border: 0;
   padding: 0;
   font-size: 24px;
-}
+} */

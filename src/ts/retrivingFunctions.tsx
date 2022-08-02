@@ -1,12 +1,20 @@
+import { SpaceValue } from "../components/BlankSudoku/BlankSudoku";
 import { Space } from "./sodukuSolver";
 
-export const getSpaceRow = (space: Space, puzzle: string[][]): string[] => {
-  return puzzle[space.row];
+export const getSpaceRow = (space: Space, puzzle: SpaceValue[][]): string[] => {
+  let rowValues = [];
+  for (let i = 0; i < puzzle[space.row].length; i++) {
+    rowValues.push(puzzle[space.row][i].value);
+  }
+  return rowValues;
 };
 
-export const getSpaceColumn = (space: Space, puzzle: string[][]): string[] => {
+export const getSpaceColumn = (
+  space: Space,
+  puzzle: SpaceValue[][]
+): string[] => {
   const column: Array<string> = [];
-  puzzle.forEach((row) => column.push(row[space.column]));
+  puzzle.forEach((row) => column.push(row[space.column].value));
   return column;
 };
 
@@ -35,13 +43,16 @@ export const findStartingSpace = (space: Space): Space => {
   return startingSpace;
 };
 
-export const getSpaceSquare = (space: Space, puzzle: string[][]): string[] => {
+export const getSpaceSquare = (
+  space: Space,
+  puzzle: SpaceValue[][]
+): string[] => {
   const startingSpace = findStartingSpace(space);
   const square: Array<string> = [];
 
   for (let i = startingSpace.row; i < startingSpace.row + 3; i++) {
     for (let j = startingSpace.column; j < startingSpace.column + 3; j++) {
-      square.push(puzzle[i][j]);
+      square.push(puzzle[i][j].value);
     }
   }
 
